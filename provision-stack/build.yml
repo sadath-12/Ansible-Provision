@@ -3,8 +3,8 @@
   connection: local
   become: yes
   tasks:
-    - name: Install  jdk, maven, git
-      apt:
+    - name: Install  jdk, maven, git 
+      apt: 
         name: "{{item}}"
         state: present
         update_cache: yes
@@ -22,6 +22,8 @@
       register: git_status
 
 
+# generate artifacts where there is change in code
+
     - name: mvn install command to build artifact
       command: "mvn install"
       args:
@@ -29,6 +31,8 @@
       when: git_status.changed
       register: mvn_info
 
+
+# so copy the generated artifacts
 
     - name: Copy artifacts to files directory
       copy:

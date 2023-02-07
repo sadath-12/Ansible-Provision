@@ -20,7 +20,6 @@
       tags:
         - svc
 
-
     - name: Disable Nginx default website
       file:
         path: /etc/nginx/sites-enabled/default

@@ -5,10 +5,14 @@
   tasks:
     - name: Copy SQL to dbsrv
       copy:
+      # here why changing paths
+
         src: files/db_backup.sql
         dest: /tmp/db_backup.sql
       tags:
         - deploy
+
+# what restoring db and why ??
 
     - name: Restoring DB
       mysql_db:
@@ -16,8 +20,10 @@
         login_user: "{{dbuser}}"
         login_password: "{{dbpass}}"
         state: import
+        # here also why storing in tmp dir
         target: /tmp/db_backup.sql
-      notify:
+
+      notify: 
         - Restart mysql
       tags:
         - deploy

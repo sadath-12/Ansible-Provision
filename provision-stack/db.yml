@@ -5,8 +5,9 @@
   tasks:
     - name: Installing Mysql Service and dependencies
       package:
-        name: "{{item}}"
+        name: "{{item}}" 
         state: present
+        # why cache valid_time ?
         update_cache: yes
         cache_valid_time: 86400
       loop:
@@ -31,6 +32,7 @@
       mysql_user:
         name: "{{dbuser}}"
         password: "{{dbpass}}"
+        # what kind of previlages and why that host
         priv: '*.*:ALL'
         host: '%'
         state: present
@@ -43,6 +45,7 @@
 
     - name: Enable remote login to mysql svc
       lineinfile:
+      # where is this file and why backup and whats there in backup
         path: /etc/mysql/mysql.conf.d/mysqld.cnf
         regexp: '^bind-address'
         line: 'bind-address = 0.0.0.0'
@@ -51,6 +54,8 @@
         - Restart mysql
       tags:
         - conf
+
+ # why again restart       
 
   handlers:
     - name: Restart mysql

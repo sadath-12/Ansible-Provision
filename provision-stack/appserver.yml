@@ -1,7 +1,8 @@
 ---
 - name: Setup Tomcat8 & Deploy Artifact
+## explain this whole thing line by line
   hosts: appsrvgrp
-  #  gather_facts: no
+  gather_facts: no
   vars:
     timestamp: "{{ansible_date_time.date}}_{{ansible_date_time.hour}}_{{ansible_date_time.minute}}"
     tom_url: https://archive.apache.org/dist/tomcat/tomcat-8/v8.5.37/bin/apache-tomcat-8.5.37.tar.gz
@@ -84,7 +85,7 @@
     - name: Stop tomcat8 svc
       service:
         name: tomcat8
-        state: stopped
+        state: stopped 
       tags:
         - deploy
 
